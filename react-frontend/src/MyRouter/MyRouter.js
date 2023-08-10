@@ -34,8 +34,10 @@ import LoadingWrapper from "./wrappers/LoadingWrapper";
 import ProductsPage from "../components/ProductsPage/ProductsPage";
 import CustomerPage from "../components/CustomerPage/CustomerPage";
 import CartPage from "../components/CartPage/CartPage";
-import OrderPage from "../components/OrderPage/OrderPage";
 import ItemPage from "../components/ItemPage/ItemPage";
+import TestingPage from "../components/TestingPage/Testing";
+import UserDetailsPage from "../components/CustomerPage/CustomerDetails";
+import OrderPage from "../components/OrderPage/OrderDetails";
 // ~cb-add-import~
 
 const MyRouter = () => {
@@ -180,14 +182,16 @@ const MyRouter = () => {
                 <Switch>
                     <Route path="/" exact render={() => <Dashboard colorMode={layoutColorMode} location={location} />} />
                     <Route path="/dashboard" exact render={() => <Dashboard colorMode={layoutColorMode} location={location} />} />
+                    <Route path="/testing" exact render={() => <TestingPage colorMode={layoutColorMode} location={location} />} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/signup" exact component={SignUpPage} />
                     <Route path="/account" component={Account} />
                     <Route path="/products" component={ProductsPage} />
                     <Route path="/customer" component={CustomerPage} />
                     <Route path="/cart" component={CartPage} />
-                    <Route path="/order" component={OrderPage} />
+                    <Route path="/orderdetails" component={OrderPage} />
                     <Route path="/item" component={ItemPage} />
+                    <Route path="/userdetails" component={UserDetailsPage} />
                     {/* ~cb-add-route~ */}
 
                     <Route path="*" component={NoMatch} />

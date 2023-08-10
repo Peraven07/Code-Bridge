@@ -8,17 +8,18 @@ const Dashboard = (props) => {
     useEffect(() => {}, []);
 
     return (
-        <div className="col-12 flex flex-column align-items-center">
+        <div className="col-12 flex flex-column align-items-center bg-gray-900">
             <div className="flex w-10">
                 <div className=" w-8">
                     <h4 className="ml-4">Microservices Ready</h4>
                     <div className="w-full flex justify-content-center flex-wrap ">
                         <></>
-                <div className='col-12 lg:col-6 xl:col-4'><Link to='/products'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Products</div></div></Link></div>
-                <div className='col-12 lg:col-6 xl:col-4'><Link to='/customer'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Customer</div></div></Link></div>
+                <div className='col-12 lg:col-6 xl:col-4'><Link to='/testing'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Products</div></div></Link></div>
+                <div className='col-12 lg:col-6 xl:col-4'><Link to='/userdetails'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Customer</div></div></Link></div>
                 <div className='col-12 lg:col-6 xl:col-4'><Link to='/cart'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Cart</div></div></Link></div>
-                <div className='col-12 lg:col-6 xl:col-4'><Link to='/order'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Order</div></div></Link></div>
+                <div className='col-12 lg:col-6 xl:col-4'><Link to='/orderdetails'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Order</div></div></Link></div>
                 <div className='col-12 lg:col-6 xl:col-4'><Link to='/item'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Item</div></div></Link></div>
+                {/*<div className='col-12 lg:col-6 xl:col-4'><Link to='/testing'><div className='card mb-0 flex flex-column align-items-center justify-content-center hover zoom' style={{ height: '10rem' }}><div className='text-900 font-medium text-lg'>Testing</div></div></Link></div>*/}
                         {/* ~cb-add-services-card~ */}
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import client from "../../services/restClient";
@@ -11,6 +11,8 @@ import OrderEditDialogComponent from "./OrderEditDialogComponent";
 import OrderCreateDialogComponent from "./OrderCreateDialogComponent";
 import OrderFakerDialogComponent from "./OrderFakerDialogComponent";
 import OrderSeederDialogComponent from "./OrderSeederDialogComponent";
+import { Steps } from 'primereact/steps';
+import { Toast } from 'primereact/toast';
 
 const OrderPage = (props) => {
     const history = useHistory();
@@ -92,25 +94,60 @@ const OrderPage = (props) => {
         },
     ];
 
+    /* Steps */
+    const [activeIndex, setActiveIndex] = useState(1);
+    const toast = useRef(null);
+    const items = [
+        {
+            label: 'Personal',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
+            }
+        },
+        {
+            label: 'Item List',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Second Step', detail: event.item.label });
+            }
+        },
+        {
+            label: 'Payment',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Third Step', detail: event.item.label });
+            }
+        },
+        {
+            label: 'Confirmation',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
+            }
+        }
+    ];
+
+
     return (
-        <div className="col-12 flex flex-column align-items-center">
-            <div className="col-10">
-                <h3 className="mb-0 ml-2">Order</h3>
-                <div className="col flex justify-content-end">
-                    <Button label="add" icon="pi pi-plus" onClick={() => setShowCreateDialog(true)} role="order-add-button"/>
-                    <SplitButton model={menuItems} dropdownIcon="pi pi-ellipsis-v" buttonClassName="hidden" menuButtonClassName="ml-1 p-button-text"></SplitButton>
+        <div>
+            <Toast ref={toast}></Toast>
+            <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
+            <div className="col-12 flex flex-column align-items-center">
+                <div className="col-10">
+                    <h3 className="mb-0 ml-2 ">Order Page</h3>
+                    <div className="col flex justify-content-end">
+                        <Button label="add" icon="pi pi-plus" onClick={() => setShowCreateDialog(true)} role="order-add-button"/>
+                        <SplitButton model={menuItems} dropdownIcon="pi pi-ellipsis-v" buttonClassName="hidden" menuButtonClassName="ml-1 p-button-text"></SplitButton>
+                    </div>
                 </div>
-            </div>
-            <div className="grid col-10">
-                <div className="col-12" role="order-datatable">
-                    <OrderDatatable items={data} onRowDelete={onRowDelete} onEditRow={onEditRow} onRowClick={onRowClick} />
+                <div className="grid col-10">
+                    <div className="col-12" role="order-datatable">
+                        <OrderDatatable items={data} onRowDelete={onRowDelete} onEditRow={onEditRow} onRowClick={onRowClick} />
+                    </div>
                 </div>
+                <AreYouSureDialog header="Delete" body="Are you sure you want to delete this record?" show={showAreYouSureDialog} onHide={() => setShowAreYouSureDialog(false)} onYes={() => deleteRow()} />
+                <OrderEditDialogComponent entity={data[selectedEntityIndex]} show={showEditDialog} onHide={() => setShowEditDialog(false)} onEditResult={onEditResult} />
+                <OrderCreateDialogComponent show={showCreateDialog} onHide={() => setShowCreateDialog(false)} onCreateResult={onCreateResult} />
+                <OrderFakerDialogComponent show={showFakerDialog} onHide={() => setShowFakerDialog(false)} onFakerCreateResults={onFakerCreateResults} />
+                <OrderSeederDialogComponent show={showSeederDialog} onHide={() => setShowSeederDialog(false)} onSeederResults={onSeederResults} />
             </div>
-            <AreYouSureDialog header="Delete" body="Are you sure you want to delete this record?" show={showAreYouSureDialog} onHide={() => setShowAreYouSureDialog(false)} onYes={() => deleteRow()} />
-            <OrderEditDialogComponent entity={data[selectedEntityIndex]} show={showEditDialog} onHide={() => setShowEditDialog(false)} onEditResult={onEditResult} />
-            <OrderCreateDialogComponent show={showCreateDialog} onHide={() => setShowCreateDialog(false)} onCreateResult={onCreateResult} />
-            <OrderFakerDialogComponent show={showFakerDialog} onHide={() => setShowFakerDialog(false)} onFakerCreateResults={onFakerCreateResults} />
-            <OrderSeederDialogComponent show={showSeederDialog} onHide={() => setShowSeederDialog(false)} onSeederResults={onSeederResults} />
         </div>
     );
 };
