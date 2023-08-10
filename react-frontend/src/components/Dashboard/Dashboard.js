@@ -7,9 +7,9 @@ import { Carousel } from 'primereact/carousel';
 
 const CarouselComponent = () => {
     const images = [
-        { source: 'https://i.pinimg.com/originals/d1/85/27/d18527807ab8ad236eae846cf5818bc4.png', alt: 'Image 1' },
-        { source: 'https://sakai.primereact.org/demo/images/galleria/galleria1.jpg', alt: 'Image 2' },
-        { source: 'https://sakai.primereact.org/demo/images/product/galaxy-earrings.jpg', alt: 'Image 3' },
+        { source: 'https://www.akunatech.com/blog/wp-content/uploads/2018/05/ecommerce-services.jpg', alt: 'Image 1' },
+        { source: 'https://www.redbax.com.au/images/eCommerce.jpg', alt: 'Image 2' },
+        { source: 'https://www.crazydomains.com/learn/wp-content/uploads/2021/04/5-eCommerce-Products-To-Sell-in-2021-main-image_3840X1200-scaled.jpg', alt: 'Image 3' },
     ];
   
     const itemTemplate = (item) => {
@@ -21,9 +21,8 @@ const CarouselComponent = () => {
     };
  
     return (
-      <div className="col-10 align-items-center carousel-demo">
-        <Carousel value={images} itemTemplate={itemTemplate} numVisible={1} numScroll={1} circular
-        autoplayInterval={500} />
+      <div className="col-12 m-0 align-items-center carousel-demo">
+        <Carousel value={images} itemTemplate={itemTemplate} numVisible={1} numScroll={1}/>
       </div>
     );
   };
