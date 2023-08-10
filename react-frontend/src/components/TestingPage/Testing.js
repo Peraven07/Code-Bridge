@@ -1,15 +1,71 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { connect } from "react-redux";
 import { TabMenu } from 'primereact/tabmenu';
 import { NavLink } from 'react-router-dom';
 import { DataView } from 'primereact/dataview';
 import { Button } from 'primereact/button';
 import { Rating } from "primereact/rating";
+import { Toast } from 'primereact/toast';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { useHistory } from 'react-router-dom'; // Import useHistory
 
+const OrderDetails = () => {
+
+  const toast = useRef(null);
+  const history = useHistory(); // Get history from React Router
+
+  const [orderItems, setOrderItems] = useState([]);
+  const [productName, setProductName] = useState("");
+  const [quantity, setQuantity] = useState("");
+
+  const handleAddItem = () => {
+      if (productName && quantity) {
+          const newItem = {
+              productName,
+              quantity: parseInt(quantity),
+          };
+          setOrderItems([...orderItems, newItem]);
+          setProductName("");
+          setQuantity("");
+      } else {
+          toast.current.show({
+              severity: 'warn',
+              summary: 'Input Error',
+              detail: 'Cart is Empty',
+          });
+      }
+  };
+
+  const handleProceedToPayment = () => {
+    // Navigate to the payment page
+    history.push('/orderdetails');
+  };
+
+  return (
+      <div className="card">
+          <Toast ref={toast} />
+
+          <div className="p-mt-4">
+              <h3>Order Summary</h3>
+              <DataTable value={orderItems}>
+                  <Column field="productName" header="Product Name"></Column>
+                  <Column field="quantity" header="Quantity"></Column>
+              </DataTable>
+              <Button
+                  label="Proceed to Payment"
+                  onClick={handleProceedToPayment}
+              />
+          </div>
+      </div>
+  );
+};
+
+
+{/*Menu bar in the Product Page */}
 const Navbar = () => {
   const items = [
     { label: 'Home', icon: 'pi pi-fw pi-home', path: '/' },
-    { label: 'Cart', icon: 'pi pi-fw pi-calendar', path: '/cart' },
     { label: 'Product', icon: 'pi pi-fw pi-pencil', path: '/testing' },
     { label: 'Customer', icon: 'pi pi-fw pi-file', path: '/userdetails' },
     { label: 'Order', icon: 'pi pi-fw pi-cog', path: '/orderdetails' }
@@ -26,7 +82,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="card">
+    <div className="col-12 card">
       <TabMenu
         model={items.map((item, index) => ({
           label: (
@@ -39,12 +95,6 @@ const Navbar = () => {
                 <span className="p-menuitem-icon pi pi-fw pi-home"></span>
                 <span className="p-menuitem-text">{item.label}</span>
               </NavLink>
-              {activeItem === index && (
-                <div className="submenu">
-                  {<NavLink to="/userdetails">Customer</NavLink>}
-                  {/* Example: <NavLink to="/submenu">Submenu Item</NavLink> */}
-                </div>
-              )}
             </div>
           )
         }))}
@@ -58,15 +108,15 @@ const Data_View = () => {
   const [value, setValue] = useState(null);
 
   const products = [
-    { id: 'KnM1', name: 'Wireless Keyboard and Mouse Combo, Loigys Full-Sized 2.4GHz Comfortable Palm Rest and Optical Wireless Mouse for Windows, Mac OS PC/Desktops/Computer/Laptops', imageUrl: 'https://m.media-amazon.com/images/I/61WLb8FKFRL._AC_SL1500_.jpg' },
-    { id: 'KnM2', name: 'Full Size Slim Thin Wireless Keyboard and Mouse Combo with Numeric Keypad with On/Off Switch - White & Silver', imageUrl: 'https://m.media-amazon.com/images/I/61uLF07L+7L._AC_SL1500_.jpg' },
-    { id: 'KnM3', name: 'Logitech POP Wireless Mouse and POP Keys Mechanical Keyboard Combo - Customisable Emojis, SilentTouch, Precision/Speed Scroll, Design, Bluetooth, Multi-Device, OS Compatible – Blast Yellow', imageUrl: 'https://m.media-amazon.com/images/I/71O99e+cplL._AC_SL1500_.jpg' },
-    { id: 'KnM4', name: 'Veilzor Wireless Keyboard and Mouse Combo, 2.4GHz Lag-Free Ergonomic Keyboard Full-Size with Phone Holder & 10 Independent Shortcuts, Silent Mouse with 4 DPI for Computer, Desktop, Laptop', imageUrl: 'https://m.media-amazon.com/images/I/71SqqCmHjuL._AC_SL1500_.jpg' },
-    { id: 'Watch', name: 'Military Smartwatch with Bluetooth Call, Waterproof Smart Sport Watches Rugged Outdoor Mens Watch for iPhone Android Smartwatch with HR Monitor (Black)', imageUrl: 'https://m.media-amazon.com/images/I/61swN9qXXZL._AC_SL1200_.jpg' },
-    { id: 'EarBud', name: 'SYNTRAVA Wireless Ear Clip Bone Conduction Headphones Bluetooth Open Ear Headphones Wireless Bluetooth, Waterproof Sport Running Earring Earphone for Android iPhone[Q80-S603]', imageUrl: 'https://m.media-amazon.com/images/I/61aoi5s+dkL._AC_SL1500_.jpg' },
-    { id: 'Watch', name: 'Invicta Mens Pro Diver Collection Chronograph Watch', imageUrl: 'https://m.media-amazon.com/images/I/71XuxT+R-EL._AC_UY879_.jpg' },
-    { id: 'Watch', name: 'Anne Klein Womens Leather Strap Watch', imageUrl: 'https://m.media-amazon.com/images/I/71Sbjr41u5L._AC_UY879_.jpg' },
-    { id: 'TV', name: 'HP 24mh FHD Monitor - Computer Monitor with 23.8-Inch IPS Display (1080p) - Built-In Speakers and VESA Mounting - Height/Tilt Adjustment for Ergonomic Viewing - HDMI and DisplayPort - (1D0J9AA#ABA)', imageUrl: 'https://m.media-amazon.com/images/I/91fAU6mxFsL._AC_SL1500_.jpg' },
+    { id: 1, name: 'Wireless Keyboard and Mouse Combo, Loigys Full-Sized 2.4GHz Comfortable Palm Rest and Optical Wireless Mouse for Windows, Mac OS PC/Desktops/Computer/Laptops', imageUrl: 'https://m.media-amazon.com/images/I/61WLb8FKFRL._AC_SL1500_.jpg' },
+    { id: 2, name: 'Full Size Slim Thin Wireless Keyboard and Mouse Combo with Numeric Keypad with On/Off Switch - White & Silver', imageUrl: 'https://m.media-amazon.com/images/I/61uLF07L+7L._AC_SL1500_.jpg' },
+    { id: 3, name: 'Logitech POP Wireless Mouse and POP Keys Mechanical Keyboard Combo - Customisable Emojis, SilentTouch, Precision/Speed Scroll, Design, Bluetooth, Multi-Device, OS Compatible – Blast Yellow', imageUrl: 'https://m.media-amazon.com/images/I/71O99e+cplL._AC_SL1500_.jpg' },
+    { id: 4, name: 'Veilzor Wireless Keyboard and Mouse Combo, 2.4GHz Lag-Free Ergonomic Keyboard Full-Size with Phone Holder & 10 Independent Shortcuts, Silent Mouse with 4 DPI for Computer, Desktop, Laptop', imageUrl: 'https://m.media-amazon.com/images/I/71SqqCmHjuL._AC_SL1500_.jpg' },
+    { id: 5, name: 'Military Smartwatch with Bluetooth Call, Waterproof Smart Sport Watches Rugged Outdoor Mens Watch for iPhone Android Smartwatch with HR Monitor (Black)', imageUrl: 'https://m.media-amazon.com/images/I/61swN9qXXZL._AC_SL1200_.jpg' },
+    { id: 6, name: 'SYNTRAVA Wireless Ear Clip Bone Conduction Headphones Bluetooth Open Ear Headphones Wireless Bluetooth, Waterproof Sport Running Earring Earphone for Android iPhone[Q80-S603]', imageUrl: 'https://m.media-amazon.com/images/I/61aoi5s+dkL._AC_SL1500_.jpg' },
+    { id: 7, name: 'Invicta Mens Pro Diver Collection Chronograph Watch', imageUrl: 'https://m.media-amazon.com/images/I/71XuxT+R-EL._AC_UY879_.jpg' },
+    { id: 8, name: 'Anne Klein Womens Leather Strap Watch', imageUrl: 'https://m.media-amazon.com/images/I/71Sbjr41u5L._AC_UY879_.jpg' },
+    { id: 9, name: 'HP 24mh FHD Monitor - Computer Monitor with 23.8-Inch IPS Display (1080p) - Built-In Speakers and VESA Mounting - Height/Tilt Adjustment for Ergonomic Viewing - HDMI and DisplayPort - (1D0J9AA#ABA)', imageUrl: 'https://m.media-amazon.com/images/I/91fAU6mxFsL._AC_SL1500_.jpg' },
 
     // Add more product sets here
   ];
@@ -89,7 +139,7 @@ const Data_View = () => {
     }
   };
   
-  const ProductItem = ({ name, imageUrl, quantity, onAdd, onRemove }) => {
+  const ProductItem = ({ name, imageUrl, quantity, onAdd, onRemove}) => {
     return (
       <div  className="card w-3">
         <div className="product-image-container ">
@@ -104,7 +154,7 @@ const Data_View = () => {
           </div>
           <div className="flex product-control ">
             <span className="p-buttonset">
-              <Button label=  "Add to Cart" />
+              <Button label=  "Add to Cart"/>
               <Button label= "Buy Now" />
             </span>
           </div>
@@ -129,8 +179,13 @@ const Data_View = () => {
   return (
     <div>
       <Navbar />
-      <div className="data-view">
-        <DataView value={products} layout="grid-nogutter" itemTemplate={itemTemplate} style={{ gap: '3rem' }} />
+      <div className="col-12 flex">
+        <div className="col-12 md:col-6 lg:col-8 data-view ">
+          <DataView value={products} layout="grid-nogutter" itemTemplate={itemTemplate} style={{ gap: '3rem' }}  />
+        </div>
+        <div className="col-12 md:col-6 lg:col-4">
+          <OrderDetails/>
+        </div>
       </div>
     </div>
   );

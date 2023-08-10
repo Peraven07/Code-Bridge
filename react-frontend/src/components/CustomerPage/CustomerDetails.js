@@ -1,129 +1,67 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { Toast } from 'primereact/toast';
-import { InputText } from 'primereact/inputtext';
-import { Calendar } from 'primereact/calendar';
 import { Button } from 'primereact/button';
 
 const UserDetailForm = () => {
     const toast = useRef(null);
 
-    const [userDetails, setUserDetails] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        address: "",
-        dateOfBirth: null,
-    });
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setUserDetails((prevDetails) => ({
-            ...prevDetails,
-            [name]: value,
-        }));
-    };
-
-    const handleDateOfBirthChange = (event) => {
-        setUserDetails((prevDetails) => ({
-            ...prevDetails,
-            dateOfBirth: event.value,
-        }));
-    };
-
     const handleSubmit = () => {
         // Submit the form or perform further actions here
         toast.current.show({
             severity: 'success',
-            summary: 'Form Submitted',
-            detail: 'User details have been submitted successfully.',
+            summary: 'Profile Updated',
         });
     };
 
     return (
-        <div className="p-fluid">
+        <div className="card">
             <Toast ref={toast} />
-            
-            <h2>User Details</h2>
-
-            <div className="p-fieldset p-d-flex p-flex-column">
-                <div className="p-inputgroup">
-                    <span className="p-float-label">
-                        <InputText
-                            id="firstName"
-                            name="firstName"
-                            value={userDetails.firstName}
-                            onChange={handleInputChange}
-                            placeholder=" "
-                        />
-                        <label htmlFor="firstName">First Name</label>
-                    </span>
+            <h2>User Profile</h2>
+            <div className="formgrid grid">
+                <div className="field col-12 md:col-6">
+                    <label for="firstname6">Firstname</label>
+                    <input id="firstname6" type="text" className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></input>
                 </div>
-                <div className="p-inputgroup">
-                    <span className="p-float-label">
-                        <InputText
-                            id="lastName"
-                            name="lastName"
-                            value={userDetails.lastName}
-                            onChange={handleInputChange}
-                            placeholder=" "
-                        />
-                        <label htmlFor="lastName">Last Name</label>
-                    </span>
+                <div className="field col-12 md:col-6">
+                    <label for="lastname6">Lastname</label>
+                    <input id="lastname6" type="text" className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></input>
                 </div>
-                <div className="p-inputgroup">
-                    <span className="p-float-label">
-                        <InputText
-                            id="email"
-                            name="email"
-                            value={userDetails.email}
-                            onChange={handleInputChange}
-                            placeholder=" "
-                        />
-                        <label htmlFor="email">Email</label>
-                    </span>
+                <div className="field col-12">
+                    <label for="address">Address</label>
+                    <textarea id="address" type="text" rows="4" className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
                 </div>
-                <div className="p-inputgroup">
-                    <span className="p-float-label">
-                        <InputText
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            value={userDetails.phoneNumber}
-                            onChange={handleInputChange}
-                            placeholder=" "
-                        />
-                        <label htmlFor="phoneNumber">Phone Number</label>
-                    </span>
+                <div className="field col-12 md:col-6">
+                    <label for="city">City</label>
+                    <input id="city" type="text" className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></input>
                 </div>
-                <div className="p-inputgroup">
-                    <span className="p-float-label">
-                        <InputText
-                            id="address"
-                            name="address"
-                            value={userDetails.address}
-                            onChange={handleInputChange}
-                            placeholder=" "
-                        />
-                        <label htmlFor="address">Address</label>
-                    </span>
+                <div className="field col-12 md:col-3">
+                    <label for="state">State</label>
+                    <select id="state" className="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary">
+                        <option>KL</option>
+                        <option>Selangor</option>
+                        <option>Johor Bahru</option>
+                        <option>Penang</option>
+                        <option>Negeri Sembilan</option>
+                    </select>
                 </div>
-                <div className="p-inputgroup">
-                    <span className="p-float-label">
-                        <Calendar
-                            id="dateOfBirth"
-                            name="dateOfBirth"
-                            value={userDetails.dateOfBirth}
-                            onChange={handleDateOfBirthChange}
-                            placeholder=" "
-                        />
-                        <label htmlFor="dateOfBirth">Date of Birth</label>
-                    </span>
+                <div classNames="field col-12 md:col-3">
+                    <label for="zip">Zip</label>
+                    <input id="zip" type="text" className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                 </div>
-
-                <Button
-                    label="Submit"
-                    onClick={handleSubmit}
-                />
+                <div className="field col-3">
+                    <label for="phonenum">Phone Number</label>
+                    <input id="phonenum" type="text" className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></input>
+                </div>
+                <div className="field col-5">
+                    <label for="email">Email Address</label>
+                    <input id="email" type="text" className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></input>
+                </div>
+                <div className="field col-5">
+                    <Button
+                        label="Update"
+                        onClick={handleSubmit}
+                    />
+                </div>
             </div>
         </div>
     );

@@ -39,35 +39,8 @@ const OrderDetails = () => {
     };
 
     return (
-        <div className="p-fluid">
+        <div className="col-12">
             <Toast ref={toast} />
-
-            <h2>Order Page</h2>
-
-            <div className="p-fieldset p-d-flex p-flex-column">
-                <div className="p-inputgroup">
-                    <label htmlFor="productName">Product Name:</label>
-                    <InputText
-                        id="productName"
-                        value={productName}
-                        onChange={handleProductNameChange}
-                        placeholder="Enter product name"
-                    />
-                </div>
-                <div className="p-inputgroup">
-                    <label htmlFor="quantity">Quantity:</label>
-                    <InputText
-                        id="quantity"
-                        value={quantity}
-                        onChange={handleQuantityChange}
-                        placeholder="Enter quantity"
-                    />
-                </div>
-                <Button
-                    label="Add to Order"
-                    onClick={handleAddItem}
-                />
-            </div>
 
             <div className="p-mt-4">
                 <h3>Order Summary</h3>
