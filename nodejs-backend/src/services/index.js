@@ -4,6 +4,7 @@ const customer = require("./customer/customer.service.js");
 const cart = require("./cart/cart.service.js");
 const order = require("./order/order.service.js");
 const item = require("./item/item.service.js");
+const contactus = require('./contactus/contactus.service.js');
 // ~cb-add-require-service-name~
 
 // eslint-disable-next-line no-unused-vars
@@ -15,4 +16,5 @@ module.exports = function (app) {
   app.configure(order);
   app.configure(item);
   // ~cb-add-configure-service-name~
+  app.configure(contactus);
 };
