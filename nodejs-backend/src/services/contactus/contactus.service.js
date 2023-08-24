@@ -1,9 +1,11 @@
 // Initializes the `contactus` service on path `/contactus`
 const { Contactus } = require('./contactus.class');
+const createModel = require('../../models/contactus.model');
 const hooks = require('./contactus.hooks');
 
 module.exports = function (app) {
   const options = {
+    Model: createModel(app),
     paginate: app.get('paginate')
   };
 

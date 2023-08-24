@@ -1,10 +1,24 @@
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
+
+// const getSchemaValidationErrorsStrings = (errorObj) => {
+//     let errMsg = [];
+//     for (const key in errorObj.errors) {
+//         if (Object.hasOwnProperty.call(errorObj.errors, key)) {
+//             const element = errorObj.errors[key];
+//             if (element?.message) {
+//                 errMsg.push(element.message);
+//             }
+//         }
+//     }
+//     return errMsg.length ? errMsg : errorObj.message ? errorObj.message : null;
+// };
+
 
 const ContactUsPage = (props) => {
     const [visibleRight, setVisibleRight] = useState(false); // SideBar
@@ -24,6 +38,49 @@ const ContactUsPage = (props) => {
     const [companyError, setCompanyError] = useState(null);
     const [positionError, setPositError] = useState(null);
     const [messageError, setMessageError] = useState(null);
+
+    // const history = useHistory();
+
+    // const [_entity, set_entity] = useState({});
+    // const [error, setError] = useState("");
+
+    // const [loading, setLoading] = useState(false);
+
+    // useEffect(()=>{
+    //     set_entity({})
+    // },[props.show])
+    // const onSave = async () => {
+    //         let _data = {
+    //             firstname:_entity.firstname,
+    //             lastname:_entity.lastname,
+    //             contactnumber:_entity.contactnumber, 
+    //             emailaddress:_entity.emailaddress, 
+    //             company:_entity.company, 
+    //             position:_entity.position, 
+    //             message:_entity.message, 
+
+    //         };
+   
+    //     setLoading(true);
+    //     try {
+    //         const result = await client.service("aboutus").create(_data);
+    //         props.onHide();
+    //         props.alert({ type: "success", title: "Create", message: "Created successfully" });
+    //         props.onCreateResult(result);
+    //     } catch (error) {
+    //         console.log("error", error);
+    //         setError(getSchemaValidationErrorsStrings(error) || "Failed to create");
+    //         props.alert({ type: "error", title: "Create", message: "Failed to create" });
+    //     }
+    //     setLoading(false);
+    
+
+    // const renderFooter = () => (
+    //     <div className="flex justify-content-end">
+    //         <Button label="save" className="p-button-text no-focus-effect" onClick={onSave} loading={loading} />
+    //         <Button label="close" className="p-button-text no-focus-effect p-button-secondary" onClick={props.onHide} />
+    //     </div>
+    // );
 
     const history = useHistory();
 
@@ -230,10 +287,10 @@ const mapState = () => {
 
 };
 
-
 const mapDispatch = (dispatch) => ({
     createUser: (data) => dispatch.auth.createUser(data),
 });
 
 export default connect(mapState, mapDispatch)(ContactUsPage);
+        
         

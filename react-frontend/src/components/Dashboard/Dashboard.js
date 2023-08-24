@@ -33,9 +33,11 @@ const Dashboard = (props) => {
     const items = [
         { label: 'Home', icon: 'pi pi-fw pi-home', path: '/' },
         { label: 'Product', icon: 'pi pi-fw pi-pencil', path: '/testing' },
-        { label: 'Customer', icon: 'pi pi-fw pi-file', path: '/userdetails' },
+        { label: 'User Details', icon: 'pi pi-fw pi-file', path: '/userdetails' },
         { label: 'Order', icon: 'pi pi-fw pi-cog', path: '/orderdetails' },
         { label: 'About Us', icon: 'pi pi-fw pi-cog', path: '/aboutus' },
+        { label: 'Customer', icon: 'pi pi-fw pi-cog', path: '/customer' },
+        { label: 'Contact Us', icon: 'pi pi-fw pi-cog', path: '/contactus'}
       ];
     
       const [activeItem, setActiveItem] = useState(null);
