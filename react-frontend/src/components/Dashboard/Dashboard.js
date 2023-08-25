@@ -5,6 +5,7 @@ import { TabMenu } from 'primereact/tabmenu';
 import { NavLink } from 'react-router-dom';
 import { Carousel } from 'primereact/carousel';
 import ContactUsPage from "../ContactPage/ContactUsPage";
+import FeedbackPage from "../FeedbackPage/FeedbackPage";
 
 const CarouselComponent = () => {
     const images = [
@@ -37,7 +38,6 @@ const Dashboard = (props) => {
         { label: 'Order', icon: 'pi pi-fw pi-cog', path: '/orderdetails' },
         { label: 'About Us', icon: 'pi pi-fw pi-cog', path: '/aboutus' },
         { label: 'Customer', icon: 'pi pi-fw pi-cog', path: '/customer' },
-        { label: 'Contact Us', icon: 'pi pi-fw pi-cog', path: '/contactus'}
       ];
     
       const [activeItem, setActiveItem] = useState(null);
@@ -67,6 +67,7 @@ const Dashboard = (props) => {
               )
             }))}/>
         <div className="grid grid-nogutter surface-0 text-800">
+        <FeedbackPage/>
         <ContactUsPage />
         <CarouselComponent/>
             <div className="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">

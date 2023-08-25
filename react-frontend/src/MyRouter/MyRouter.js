@@ -40,6 +40,7 @@ import UserDetailsPage from "../components/CustomerPage/CustomerDetails";
 import OrderPage from "../components/OrderPage/OrderDetails";
 import AboutUsPage from "../components/AboutUsPage/AboutUsPage";
 import ContactUsPage from "../components/ContactPage/ContactUsPage";
+import FeedbackPage from "../components/FeedbackPage/FeedbackPage";
 // ~cb-add-import~
 
 const MyRouter = () => {
@@ -196,6 +197,8 @@ const MyRouter = () => {
                     <Route path="/userdetails" component={UserDetailsPage} />
                     <Route path="/aboutus" component={AboutUsPage} />
                     <Route path="/contactus" component={ContactUsPage} />
+                    <Route path="/feedback" component={FeedbackPage} />
+                    
                     {/* ~cb-add-route~ */}
 
                     <Route path="*" component={NoMatch} />
