@@ -5,7 +5,8 @@ import { Button } from "primereact/button";
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from "primereact/inputtextarea";
 import { Dialog } from 'primereact/dialog';
-        
+import { Rating } from "primereact/rating";
+
 const getSchemaValidationErrorsStrings = (errorObj) => {
     let errMsg = [];
     for (const key in errorObj.errors) {
@@ -20,20 +21,20 @@ const getSchemaValidationErrorsStrings = (errorObj) => {
 };
 
 const FeedbackPopUp = (props) => {
-    const [_entity, set_entity] = useState({});
-    const [error, setError] = useState("");
+    const [_entity, set_entity] = useState({});     // linking to the database
+    const [error, setError] = useState("");         // check the error(validation)
+    const [loading, setLoading] = useState(false);  // submit button loading
 
-    const [loading, setLoading] = useState(false);
-
-    useEffect(()=>{
+    useEffect(() => {
         set_entity({})
-    },[props.show])
+    }, [props.show])
     const onSave = async () => {
         let _data = {
-            fullname:_entity.fullname,
-            contactnumber:_entity.contactnumber, 
-            emailaddress:_entity.emailaddress, 
-            feedback:_entity.feedback, 
+            fullname: _entity.fullname,
+            contactnumber: _entity.contactnumber,
+            emailaddress: _entity.emailaddress,
+            rating: _entity.rating,
+            feedback: _entity.feedback,
 
         };
 
@@ -63,29 +64,31 @@ const FeedbackPopUp = (props) => {
                 <h2>Feedback Form</h2>
                 <div>
                     <p className="m-0" >Full Name</p>
-                    <InputText className="w-full mb-3" placeholder="Enter your full name" value={_entity?.fullname} onChange={(e) => setValByKey("fullname", e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="Enter your full name" value={_entity?.fullname} onChange={(e) => setValByKey("fullname", e.target.value)} />
                 </div>
                 <div>
                     <p className="m-0" >Contact Number</p>
-                    <InputText className="w-full mb-3" placeholder="Active Contact Number" value={_entity?.contactnumber} onChange={(e) => setValByKey("contactnumber", e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="Active Contact Number" value={_entity?.contactnumber} onChange={(e) => setValByKey("contactnumber", e.target.value)} />
                 </div>
                 <div>
                     <p className="m-0" >Email</p>
-                    <InputText className="w-full mb-3" placeholder="Email Address" value={_entity?.emailaddress} onChange={(e) => setValByKey("emailaddress", e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="Email Address" value={_entity?.emailaddress} onChange={(e) => setValByKey("emailaddress", e.target.value)} />
                 </div>
                 <div>
                     <p className="m-0" >Feedback</p>
-                    <InputTextarea autoResize className="w-full mb-3" placeholder="What can we improve?" value={_entity?.feedback} onChange={(e) => setValByKey("feedback",e.target.value)} rows={5} cols={30}  />
+                    <InputTextarea autoResize className="w-full mb-3" placeholder="What can we improve?" value={_entity?.feedback} onChange={(e) => setValByKey("feedback", e.target.value)} rows={5} cols={30} />
                 </div>
-
-
+                <div>
+                    <p className="m-0" >Website Rating</p>
+                    <Rating className="w-full mb-3" value={_entity?.rating} onChange={(e) => setValByKey("rating", e.target.value)} cancel={false} />
+                </div>
                 <small className="p-error">
                     {Array.isArray(error)
                         ? error.map((e, i) => (
-                              <p className="m-0" key={i}>
-                                  {e}
-                              </p>
-                          ))
+                            <p className="m-0" key={i}>
+                                {e}
+                            </p>
+                        ))
                         : error}
                 </small>
             </div>

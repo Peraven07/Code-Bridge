@@ -10,6 +10,7 @@ module.exports = function (app) {
       fullname: { type: String,required: true},
       contactnumber: { type: String,required: true},
       emailaddress: { type: String,required: true},
+      rating:{type: Number,required: true},
       feedback: { type: String,required: true},
   }, {
     timestamps: true

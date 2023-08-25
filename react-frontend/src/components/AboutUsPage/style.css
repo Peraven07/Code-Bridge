@@ -1,0 +1,12 @@
+.info-line {
+    display: block;
+    /* Ensures each line is on a new line */
+    margin-bottom: 8px;
+    /* Adds spacing between lines */
+    text-decoration: none;
+    /* Removes underlines from links */
+    content: ":";
+    /* Add the colon as content before each info line */
+    margin-right: 4px;
+    /* Adds spacing between the colon and text */
+}

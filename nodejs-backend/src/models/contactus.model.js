@@ -7,13 +7,13 @@
         const schema = new Schema(
           // ~cb-read-start~
           {
-       firstname: { type: String},
-       lastname: { type: String},
-       contactnumber: { type: String},
-       emailaddress: { type: String},
-       company: { type: String},
+       firstname: { type: String,required: true},
+       lastname: { type: String,required: true},
+       contactnumber: { type: String,required: true},
+       emailaddress: { type: String,required: true},
+       company: { type: String,required: true},
        position: { type: String},
-       message: { type: String},
+       message: { type: String,required: true},
 
     }
           // ~cb-read-end~

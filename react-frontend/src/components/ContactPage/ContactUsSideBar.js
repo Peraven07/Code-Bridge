@@ -66,31 +66,31 @@ const ContactUsSideBar = (props) => {
                 <h2>Contact Us</h2>
                 <div>
                     <p className="m-0" >First Name</p>
-                    <InputText className="w-full mb-3" value={_entity?.firstname} onChange={(e) => setValByKey("firstname", e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="Enter your first name" value={_entity?.firstname} onChange={(e) => setValByKey("firstname", e.target.value)}  />
                 </div>
                 <div>
                     <p className="m-0" >Last Name</p>
-                    <InputText className="w-full mb-3" value={_entity?.lastname} onChange={(e) => setValByKey("lastname", e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="Enter your last name" value={_entity?.lastname} onChange={(e) => setValByKey("lastname", e.target.value)}  />
                 </div>
                 <div>
                     <p className="m-0" >Contact Number</p>
-                    <InputText className="w-full mb-3" value={_entity?.contactnumber} onChange={(e) => setValByKey("contactnumber", e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="Current Contact Number" value={_entity?.contactnumber} onChange={(e) => setValByKey("contactnumber", e.target.value)}  />
                 </div>
                 <div>
                     <p className="m-0" >Email</p>
-                    <InputText className="w-full mb-3" value={_entity?.emailaddress} onChange={(e) => setValByKey("emailaddress", e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="Active Email" value={_entity?.emailaddress} onChange={(e) => setValByKey("emailaddress", e.target.value)}  />
                 </div>
                 <div>
                     <p className="m-0" >Company Name</p>
-                    <InputText className="w-full mb-3" value={_entity?.company} onChange={(e) => setValByKey("company",e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="(example: Google, Apple)" value={_entity?.company} onChange={(e) => setValByKey("company",e.target.value)}  />
                 </div>
                 <div>
                     <p className="m-0" >Position</p>
-                    <InputText className="w-full mb-3" value={_entity?.position} onChange={(e) => setValByKey("position",e.target.value)}  />
+                    <InputText className="w-full mb-3" placeholder="(e.g: Manager)" value={_entity?.position} onChange={(e) => setValByKey("position",e.target.value)}  />
                 </div>
                 <div>
                     <p className="m-0" >Message</p>
-                    <InputTextarea autoResize className="w-full mb-3" value={_entity?.message} onChange={(e) => setValByKey("message",e.target.value)} rows={5} cols={30}  />
+                    <InputTextarea autoResize className="w-full mb-3" placeholder="What's on your mind?" value={_entity?.message} onChange={(e) => setValByKey("message",e.target.value)} rows={5} cols={30}  />
                 </div>
 
 
