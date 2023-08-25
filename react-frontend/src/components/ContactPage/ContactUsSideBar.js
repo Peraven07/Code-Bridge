@@ -1,13 +1,11 @@
-
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import client from "../../services/restClient";
-import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { InputText } from 'primereact/inputtext';
-
-
- 
+import { Sidebar } from 'primereact/sidebar';
+import { InputTextarea } from "primereact/inputtextarea";
+        
 const getSchemaValidationErrorsStrings = (errorObj) => {
     let errMsg = [];
     for (const key in errorObj.errors) {
@@ -21,7 +19,7 @@ const getSchemaValidationErrorsStrings = (errorObj) => {
     return errMsg.length ? errMsg : errorObj.message ? errorObj.message : null;
 };
 
-const CustomerCreateDialogComponent = (props) => {
+const ContactUsSideBar = (props) => {
     const [_entity, set_entity] = useState({});
     const [error, setError] = useState("");
 
@@ -32,18 +30,21 @@ const CustomerCreateDialogComponent = (props) => {
     },[props.show])
     const onSave = async () => {
         let _data = {
-            CustomerId: _entity.CustomerId,
-            customername: _entity.customername,
-            address: _entity.address,
-            contactNum: _entity.contactNum
+            firstname:_entity.firstname,
+            lastname:_entity.lastname,
+            contactnumber:_entity.contactnumber, 
+            emailaddress:_entity.emailaddress, 
+            company:_entity.company, 
+            position:_entity.position, 
+            message:_entity.message, 
 
         };
 
         setLoading(true);
         try {
-            const result = await client.service("customer").create(_data);
+            const result = await client.service("contactus").create(_data);
             props.onHide();
-            props.alert({ type: "success", title: "Create", message: "Created successfully" });
+            props.alert({ type: "success", title: "Create", message: "Application successfully sent" });
             props.onCreateResult(result);
         } catch (error) {
             console.log("error", error);
@@ -53,13 +54,6 @@ const CustomerCreateDialogComponent = (props) => {
         setLoading(false);
     };
 
-    const renderFooter = () => (
-        <div className="flex justify-content-end">
-            <Button label="save" className="p-button-text no-focus-effect" onClick={onSave} loading={loading} />
-            <Button label="close" className="p-button-text no-focus-effect p-button-secondary" onClick={props.onHide} />
-        </div>
-    );
-
     const setValByKey = (key, val) => {
         let new_entity = { ..._entity, [key]: val };
         set_entity(new_entity);
@@ -67,23 +61,36 @@ const CustomerCreateDialogComponent = (props) => {
     };
 
     return (
-        <Dialog header="Create" visible={props.show} closable={false} onHide={props.onHide} modal style={{ width: "40vw" }} className="min-w-max" footer={renderFooter()} resizable={false}>
-            <div role="customer-create-dialog-component">
+        <Sidebar header="Create" position="right" visible={props.show} closable={false} onHide={props.onHide} modal style={{ width: "30vw" }} className="min-w-max" resizable={false}>
+            <div role="contactus-sidebar-component">
+                <h2>Contact Us</h2>
                 <div>
-                    <p className="m-0" >Customer ID:</p>
-                    <InputText className="w-full mb-3" value={_entity?.CustomerId} onChange={(e) => setValByKey("CustomerId", e.target.value)}  />
+                    <p className="m-0" >First Name</p>
+                    <InputText className="w-full mb-3" value={_entity?.firstname} onChange={(e) => setValByKey("firstname", e.target.value)}  />
                 </div>
                 <div>
-                    <p className="m-0" >Name:</p>
-                    <InputText className="w-full mb-3" value={_entity?.customername} onChange={(e) => setValByKey("customername", e.target.value)}  />
+                    <p className="m-0" >Last Name</p>
+                    <InputText className="w-full mb-3" value={_entity?.lastname} onChange={(e) => setValByKey("lastname", e.target.value)}  />
                 </div>
                 <div>
-                    <p className="m-0" >Address:</p>
-                    <InputText className="w-full mb-3" value={_entity?.address} onChange={(e) => setValByKey("address", e.target.value)}  />
+                    <p className="m-0" >Contact Number</p>
+                    <InputText className="w-full mb-3" value={_entity?.contactnumber} onChange={(e) => setValByKey("contactnumber", e.target.value)}  />
                 </div>
                 <div>
-                    <p className="m-0" >Contact Number:</p>
-                    <InputText className="w-full mb-3" value={_entity?.contactNum} onChange={(e) => setValByKey("contactNum", e.target.value)}  />
+                    <p className="m-0" >Email</p>
+                    <InputText className="w-full mb-3" value={_entity?.emailaddress} onChange={(e) => setValByKey("emailaddress", e.target.value)}  />
+                </div>
+                <div>
+                    <p className="m-0" >Company Name</p>
+                    <InputText className="w-full mb-3" value={_entity?.company} onChange={(e) => setValByKey("company",e.target.value)}  />
+                </div>
+                <div>
+                    <p className="m-0" >Position</p>
+                    <InputText className="w-full mb-3" value={_entity?.position} onChange={(e) => setValByKey("position",e.target.value)}  />
+                </div>
+                <div>
+                    <p className="m-0" >Message</p>
+                    <InputTextarea autoResize className="w-full mb-3" value={_entity?.message} onChange={(e) => setValByKey("message",e.target.value)} rows={5} cols={30}  />
                 </div>
 
 
@@ -97,7 +104,10 @@ const CustomerCreateDialogComponent = (props) => {
                         : error}
                 </small>
             </div>
-        </Dialog>
+            <div className="flex justify-content-left">
+                <Button label="Submit" className="p-button-text no-focus-effect" onClick={onSave} loading={loading} />
+            </div>
+        </Sidebar>
     );
 };
 
@@ -108,5 +118,4 @@ const mapDispatch = (dispatch) => ({
     alert: (data) => dispatch.toast.alert(data),
 });
 
-export default connect(null, mapDispatch)(CustomerCreateDialogComponent);
-// createDialog_code.template
+export default connect(null, mapDispatch)(ContactUsSideBar );
