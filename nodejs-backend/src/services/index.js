@@ -6,6 +6,7 @@ const order = require("./order/order.service.js");
 const item = require("./item/item.service.js");
 const contactus = require('./contactus/contactus.service.js');
 const feedback = require('./feedback/feedback.service.js');
+const techSupport = require('./tech-support/tech-support.service.js');
 // ~cb-add-require-service-name~
 
 // eslint-disable-next-line no-unused-vars
@@ -19,4 +20,5 @@ module.exports = function (app) {
   // ~cb-add-configure-service-name~
   app.configure(contactus);
   app.configure(feedback);
+  app.configure(techSupport);
 };

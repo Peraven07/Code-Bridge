@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { Carousel } from 'primereact/carousel';
 import ContactUsPage from "../ContactPage/ContactUsPage";
 import FeedbackPage from "../FeedbackPage/FeedbackPage";
+import TechSupportPage from "../TechSupportPage/TechSupportPage";
 
 const CarouselComponent = () => {
     const images = [
@@ -67,6 +68,7 @@ const Dashboard = (props) => {
               )
             }))}/>
         <div className="grid grid-nogutter surface-0 text-800">
+        <TechSupportPage/>
         <FeedbackPage/>
         <ContactUsPage />
         <CarouselComponent/>
