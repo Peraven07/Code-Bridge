@@ -27,6 +27,9 @@ const TechSupportForm = (props) => {
     const [error, setError] = useState("");         // check the error(validation)
     const [loading, setLoading] = useState(false);  // submit button loading
 
+    // Regular expression pattern for email validation
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
     useEffect(() => {
         set_entity({})
     }, [props.show])
@@ -51,13 +54,14 @@ const TechSupportForm = (props) => {
             return;
         }
 
-        // if (!_entity.emailaddress) {
-        //     setError('Email Address is required.');
-        //     return;
-        // } else if (!isEmail(_entity.emailaddress)) {
-        //     setError('Please enter a valid email address.');
-        //     return;
-        // }
+        // Email validation using regex pattern
+        if (!_entity.emailaddress) {
+            setError('Email Address is required.');
+            return;
+        } else if (!emailPattern.test(_entity.emailaddress)) {
+            setError('Please enter a valid email address.');
+            return;
+        }
 
         if (!_entity.issue) {
             setError('Issue description is required.');
@@ -106,7 +110,10 @@ const TechSupportForm = (props) => {
                 <div>
                     <p className="m-0" >Email</p>
                     <InputText className="w-full mb-3" placeholder="Email Address" value={_entity?.emailaddress} onChange={(e) => setValByKey("emailaddress", e.target.value)} />
-                    <small className="p-error"></small>
+                    <small className="p-error">
+                        {_entity?.emailaddress === "" && error === "emailaddress" && <p className="m-0">Email Address is required.</p>}
+                        {_entity?.emailaddress !== "" && error === "emailaddress" && !emailPattern(_entity?.emailaddress) && <p className="m-0">Please enter a valid email address.</p>}
+                    </small>
                 </div>
                 <div>
                     <p className="m-0" >Issue to solve</p>
@@ -119,15 +126,7 @@ const TechSupportForm = (props) => {
                     <p className="m-0" >Upload the image</p>
                     <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} value={_entity?.image} onChange={(e) => setValByKey("image", e.target.value)} />
                 </div>
-                <small className="p-error">
-                    {Array.isArray(error)
-                        ? error.map((e, i) => (
-                              <p className="m-0" key={i}>
-                                  {e}
-                              </p>
-                          ))
-                        : error}
-                </small>
+                <small className="p-error">{Array.isArray(error)? error.map((e, i) => (<p className="m-0" key={i}>{e}</p>)): error}</small>
             </div>
             <div style={{ height: "20px" }} />
             <div className="flex-wrap justify-content-left">
